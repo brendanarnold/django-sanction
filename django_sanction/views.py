@@ -17,7 +17,7 @@ from django.utils.crypto import constant_time_compare
 from django.middleware import csrf
 from django.middleware.csrf import CsrfViewMiddleware
 
-from sanction.client import Client as SanctionClient
+from sanction import Client as SanctionClient
 
 def login(request, provider):
     """ Log in the current user following the OAuth 2.0 server flow
@@ -49,11 +49,13 @@ def login(request, provider):
 
 def _redirect(request, provider):
     p = settings.SANCTION_PROVIDERS[provider]
-    c = SanctionClient(auth_endpoint=p['auth_endpoint'],
-        client_id=p['client_id'], redirect_uri=p['redirect_uri'])
+    c = SanctionClient(auth_endpoint=p['auth_endpoint'], client_id=p['client_id'])
 
     kwargs = p.get('auth_params', {})
-    response = redirect(c.auth_uri(p['scope'] if 'scope' in p else None, **kwargs))
+    kwargs['redirect_uri'] = p['redirect_uri']
+    if 'scope' in p:
+        kwargs['scope'] = p['scope']
+    response = redirect(c.auth_uri(**kwargs))
 
     # inject the state query param
     if getattr(settings, 'SANCTION_USE_CSRF', True):
