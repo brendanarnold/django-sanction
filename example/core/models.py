@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, UserManager
 from lazy import lazy
-from sanction.client import Client as SanctionClient
+from sanction import Client as SanctionClient
 
 class User(AbstractBaseUser):
     USERNAME_FIELD = 'username'

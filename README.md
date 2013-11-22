@@ -1,10 +1,11 @@
 
-### Modified to work with sanction 0.4 ###
+### Needs to be modified to work with sanction 0.4 ###
 
 **Will no longer work with Sanction 0.3.1 and earlier** New version of
 Sanction breaks compatibility and does not include an easy way to obtain
-the version. Use this version of django_sanction for new projects or
-when installing the original be sure to use `pip install sanction==0.3.1`
+the version. This version of django_sanction will hopefully soon be compatible. Currently validates and returns with token from Google but the backend.py needs work. 
+
+Until then when using django_sanction be sure to specify `pip install sanction==0.3.1`
 
 ### About ###
 
