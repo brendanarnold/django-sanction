@@ -10,7 +10,7 @@ except ImportError: # pragma: no cover
 from django.conf import settings
 from django.conf.urls.defaults import patterns, include, url
 from django.http import HttpResponseForbidden
-from sanction.client import Client as SanctionClient
+from sanction import Client as SanctionClient
 
 # monkey-patch sanction.request_token for tests
 def _request_token(self, **kwargs):
